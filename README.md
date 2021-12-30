@@ -1,7 +1,7 @@
 PayGreen - CarbonBot - Widget JS
 ===========
 
-![Carbon Bot presentation](https://github.com/PayGreen/carbon-bot-doc/blob/main/doc/presentation.png)
+![Carbon Bot presentation](https://github.com/PayGreen/carbon-bot-doc/blob/main/doc/presentation.jpg)
 
 > **ClimateKit documentation**
 > In order to understand how to create a carbon footprint and get your tokens, you can to check our ClimateKit API [documentation](https://api-climatekit.paygreen.fr/documentation/climate)
