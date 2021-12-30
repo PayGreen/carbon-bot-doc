@@ -1,46 +1,49 @@
 PayGreen - CarbonBot - Widget JS
 ===========
 
-## ClimateKit documentation
-In order to understand how to create a carbon footprint and get your tokens, you can to check our ClimateKit API documentation: https://api-climatekit.paygreen.fr/documentation/climate
+|                                   Default CarbonBot display                                    |                                         With personalized color                                          |
+|:----------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------:|
+| ![Default Carbon Bot](https://github.com/PayGreen/carbon-bot-doc/blob/main/doc/carbon-bot.png) | ![Blue Carbon Bot](https://github.com/PayGreen/carbon-bot-doc/blob/main/doc/carbon-bot-personalized.png) |
+
+> **ClimateKit documentation**
+> In order to understand how to create a carbon footprint and get your tokens, you can to check our ClimateKit API [documentation](https://api-climatekit.paygreen.fr/documentation/climate)
 
 
 ## 1. Adding JS script
 Add the javascript file in your code:
 ```html
-<script src="https://carbonbot.paygreen.fr/latest/carbon-bot.min.js"></script>
+<script src="https://carbonbot.paygreen.fr/1.0.0/carbon-bot.min.js"></script>
 ```
 
-## 2. Configure CarbonBot
-You need to set dynamically your user and your token footprint.
+## 2. Retrieve the user id and footprint
+You need to find your user and your token footprint.
 
-```js
-const configBot = {
-    user: "",
-    token: "",
-    position: "left", // optionnal: left, right
-    colors: { // optionnal
-        primary: "#28588a",
-        primaryLight: "#d1ebff",
-    },
-    link: "https://my-website.com/my-engagements",
-    shopName: "My shop"
-};
+Retrieve the user id:
+```shell
+curl --location --request GET 'http://api-climatekit.paygreen.fr/account/me/user/me' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer my_bearer'
 ```
 
-## 3. Configure ResquestHandler
-Set your environement to PROD ("https://api-climatekit.paygreen.fr") or SANDBOX ("https://sb-api-climatekit.paygreen.fr").
+To retrieve the footprint, you must have created it first:  [documentation](https://api-climatekit.paygreen.fr/documentation/climate#tag/CarbonFootprint/paths/~1carbon~1footprints/post)
+
+## 3. Init CarbonBot
+You need to init your CarbonBot by passing all your parameters:
 
 ```js
-const configRequest = {
+carbonBot.init({
     endpoint: "https://api-climatekit.paygreen.fr",
-    testMode: false // 
-};
-```
-
-## 4. Last step
-You need to init your carbonBot by passing all your parameters:
-
-```js
-carbonBot.init(configBot,configBlock,configRequest,translations);
+    testMode: false,
+    bot: {
+        user: "user_id_here",
+        token: "footprint_here",
+        position: "inline", // optionnal: left, right
+        colors: { // optionnal
+            primary: "#a5211f",
+        },
+        engagementLink: "https://my-website.com/my-engagements",
+        shopName: "My shop name",
+    }
+});
 ```
