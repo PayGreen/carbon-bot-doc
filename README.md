@@ -10,7 +10,7 @@ PayGreen - CarbonBot - Widget JS
 ## 1. Adding JS script
 Add the javascript file in your code:
 ```html
-<script src="https://carbonbot.paygreen.fr/1.0.0/carbon-bot.min.js"></script>
+<script src="https://carbonbot.paygreen.fr/1.0.3/carbon-bot.min.js"></script>
 ```
 
 ## 2. Retrieve the user id and footprint
@@ -36,12 +36,23 @@ carbonBot.init({
     bot: {
         user: "user_id_here",
         token: "footprint_here",
-        position: "inline", // optionnal: left, right
+        shopName: "My shop name",
+        cartPrice: 1250, // optionnal: current cart price in cent
+        position: "right", // optionnal: left, right
         colors: { // optionnal
             primary: "#a5211f",
         },
-        engagementLink: "https://my-website.com/my-engagements",
-        shopName: "My shop name",
+        engagementLink: "https://my-website.com/my-engagements", // optionnal
+        translations: { // optionnal, shopName is automatically replaced
+            "en": {
+                title: "My carbon neutral purchase thanks to {shopName}",
+                engagementDescription: "{shopName} finances GHG reduction and sequestration projects up to the amount of your emissions. 🎉",
+            },
+            "fr": {
+                title: "Mon achat neutre en carbone grâce à {shopName}",
+                engagementDescription: "{shopName} finance des projets de réduction et de séquestration de GES à hauteur de vos émissions. 🎉",
+            }
+        },
     }
 });
 ```
