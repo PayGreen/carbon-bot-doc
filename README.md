@@ -10,7 +10,7 @@ PayGreen - CarbonBot - Widget JS
 ## 1. Adding JS script
 Add the javascript file in your code:
 ```html
-<script src="https://carbonbot.paygreen.fr/1.0.4/carbon-bot.js"></script>
+<script src="https://carbonbot.paygreen.fr/1.0.5/carbon-bot.js"></script>
 ```
 
 ## 2. Retrieve the user id and footprint
