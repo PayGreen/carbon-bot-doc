@@ -10,7 +10,7 @@ PayGreen - CarbonBot - Widget JS
 ## 1. Adding JS script
 Add the javascript file in your code:
 ```html
-<script src="https://carbonbot.paygreen.fr/latest/carbon-bot.js"></script>
+<script src="https://carbonbot.paygreen.fr/1.2/carbon-bot.js"></script>
 ```
 
 In order to import the contribution banner in your checkout page, you need to add this code:
@@ -37,24 +37,31 @@ You need to init your CarbonBot by passing all your parameters:
 ```js
 carbonBot.init({
     endpoint: "https://api-climatekit.paygreen.fr",
-    testMode: false,
-    locale: "fr", // fr, en, es
-    shopName: "My shop name",
+    testMode: false, // boolean, use api in test mode or not
+    locale: "fr", // optionnal: fr, en, es
+    shopName: "My shop name", // optionnal
     bot: {
-        user: "user_id_here",
-        token: "footprint_here",
+        user: "user_id_here", // required
+        footprint: "footprint_here", // required
+        token: "token_here", // required
         position: "right", // optionnal: left, right
         colors: { // optionnal
             primary: "#a5211f",
         },
         engagementLink: "https://my-website.com/my-engagements", // optionnal
-        displayed: true, // optionnal
+        displayed: true, // optionnal, display or not the CarbonBot
     },
     banner: { // optionnal: allows you to configure the contribution banner
-        addContributionAction: null, // set the action to add a contribution to cart, price in param: actionContribution(price)
-        removeContributionAction: null,  // set the action to remove a contribution from a cart
-        hasContributionInCart: false, // use the correct action if a contribution is in the cart or not
-        displayed: true, // optionnal
+        addContributionAction: function(price) {
+            console.log(`Add contribution of ${price} cents in the cart.`);
+            window.location.replace("example.com/add-to-cart?price=" + price);
+        },
+        removeContributionAction: : function() {
+            console.log(`Remove contribution from cart.`);
+            window.location.replace("example.com/add-to-cart?price=" + price);
+        },
+        hasContributionInCart: false, // boolean, whether the contribution is in the cart or not
+        displayed: true, // optionnal, display or not the contribution banner
     },
     cart: {
         price: 2000, // current cart price in cent
@@ -65,10 +72,23 @@ carbonBot.init({
             postcode: '75001',
             country: 'France'
         },
+        shippingToAddress: {
+            street: null,
+            city: null,
+            postcode: null,
+            country: 'France'
+        },
         transportationExternalId: "1-28022",
-        deliveryService : null
+        deliveryService : null, // optionnal: set "Colissimo" if you use it
+        items: [
+            {
+                productExternalReference: "my-product-ref",
+                quantity: 2,
+                exTaxPriceInCents: 120, // price without tax in cent
+            },
+        ],
     },
-    translations: { // optionnal, variables are automatically replaced: {shopName}, {estimatedPrice},...
+    translations: { // optionnal
         "en": {
             title: "My purchase contributing to carbon neutrality",
             engagementDescription: "{shopName} finances GHG reduction and sequestration projects up to the amount of your emissions. 🎉",
